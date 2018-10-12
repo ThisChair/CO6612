@@ -32,4 +32,6 @@ target = [x[1] for x in c]
 input = np.array(input,float)
 target = np.array(target,int)
 
-competitive(input,target,args.eta,4000)
+w = competitive(input,target,args.eta,15000)
+
+print("Pesos finales: ", w)
