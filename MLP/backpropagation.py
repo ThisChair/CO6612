@@ -64,10 +64,10 @@ def backpropagation(xs, d, nh, eta, maxepoch,premature_stop=False,test=None):
         errors.append(mse)
         if test:
             ys = [feedforward(x, hw, ow)[1] for x in test[0]]
-            mset = sum([sum([(test[1][k]-y[k])**2 for k in range(len(oy))]) for y in ys])
+            mset = sum([sum([(test[1][j][k]-ys[j][k])**2 for k in range(len(oy))]) for j in range(len(test[1]))])
             mset = mset/len(ys)
             test_errors.append(mset)
-            print("Test errors: ",mset)    
+            print("Test errors: ",mset)
         if premature_stop and (mse - previous < 1e-09):
             break
         previous = mse
