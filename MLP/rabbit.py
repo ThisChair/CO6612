@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from backpropagation import *
 
 parser = argparse.ArgumentParser(
-    description='Clasificación de Iris setosa usando el algoritmo del perceptron.'
+    description='Clasificación de datos rabit.'
 )
 parser.add_argument(
     '--eta',
@@ -74,9 +74,14 @@ bp = backpropagation(input,target,args.n,args.eta,args.epochs)
 x_list = [x[1] for x in oinput]
 y_list = [predict(x,bp[0],bp[1])[0] for x in standardize(oinput)]
 yo_list = [x[0] for x in otarget]
+f = lambda x: 233.846 * (1-np.exp(-0.00604 * x))
+yf_list = [f(x) for x in x_list]
+error = sum([(y_list[i] - yo_list[i]) ** 2 for  i in range(len(y_list))]) / len(y_list)
+print("Error: ",error)
 plt.plot(x_list,y_list,label='Predicción',c='b')
 plt.plot(x_list,yo_list,label='Datos', c='r')
-plt.scatter(test[0],test[1],label='Conjunto de prueba', c='g')
+plt.plot(x_list,yf_list,label='Modelo proporcionado', c='y')
+plt.scatter(test[0],test[1],label='Conjunto de prueba', c='g', marker='.')
 plt.xlabel("Edad")
 plt.ylabel("Peso")
 plt.legend(loc='upper left')

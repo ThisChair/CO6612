@@ -9,6 +9,8 @@ with open('rabbit.csv', newline='') as f:
             dataset.append(row)
 
 shuffle(dataset)
+shuffle(dataset)
+shuffle(dataset)
 
 train_size = int(len(dataset) * 0.8)
 
